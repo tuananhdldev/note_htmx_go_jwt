@@ -1,0 +1,82 @@
+{{template "base.html"}}
+<div class="px-3 py-5">
+  <div class="flex flex-col justify-center items-center px-3">
+    <form class="border-2 rounded-2xl w-3/5 m-2">
+      <div class="flex flex-row border-b-2 border-cyan-500 p1">
+        <input
+          type="text"
+          placeholder="📝 Title of the bin"
+          required="true"
+          class="w-3/6 text-center text-lg focus:outline-none"
+          name="title"
+          autocomplete="off"
+          spellcheck="false"
+          id="title"
+        />
+        <div
+          class="w-2/6 text-center text-lg flex flex-col justify-center items-center"
+        >
+          <p id="result">result</p>
+        </div>
+        <button
+          type="submit"
+          hx-post="/create"
+          method="post"
+          hx-target="#result"
+          hx-swap="innerHTML"
+          class="w-1/6 bg-black text-white rounded-xl font-bold p-2 m-2 transform duration-500 hover:scale-105 focus:outline-none"
+        >
+          ✨ Create
+        </button>
+      </div>
+      <label for="content"></label>
+      <textarea
+        title=""
+        placeholder="enter content"
+        name="content"
+        id="content"
+        cols="10"
+        rows="15"
+        spellcheck="false"
+        class="w-full focus:outline-none p-1 text-base"
+      ></textarea>
+      <div
+        class="w-full text-lg flex flex-row justify-around border-t-2 border-cyan-600 p-2"
+      >
+        <div class="w-1/2 flex flex-row">
+          <label for="author"> ✒️ Writing as &nbsp;</label>
+          <input
+            value="{{.username}}"
+            class="text-lg focus:outline-none"
+            readonly
+            placeholder="Author Name"
+            title=""
+            name="author"
+            type="text"
+            required="true"
+          />
+        </div>
+        <div class="w-1/2 flex flex-row justify-end items-center">
+          <p id="time"></p>
+        </div>
+      </div>
+    </form>
+    <image
+      alt
+      src="https://i.pinimg.com/236x/de/75/b1/de75b17b2cca9e6ae5bf1c466c8b9e45.jpg"
+    />
+  </div>
+</div>
+<script>
+  var time = document.getElementById("time");
+  setInterval(function () {
+    date = new Date();
+    time.innerHTML = "📅 " + date.toLocaleString();
+  }, 1000);
+</script>
+<style>
+  #content {
+    font-family: "Jetbrains Mono", "Courier New", "Courier New", Courier,
+      monospace;
+  }
+</style>
